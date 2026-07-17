@@ -100,27 +100,25 @@
 
 
 
-        /* Pre-Trade Checklist Panel */
+        /* Risk Management Panel */
 
-        .checklist-panel {
+        .risk-panel {
 
             background-color: var(--card-dark);
 
-            border: 1px solid var(--accent-gold);
+            border: 1px solid var(--accent-blue);
 
             border-radius: 8px;
 
             padding: 20px;
 
-            margin-bottom: 30px;
+            margin-bottom: 20px;
 
         }
 
 
 
-        .checklist-title {
-
-            color: var(--accent-gold);
+        .panel-title {
 
             font-size: 16px;
 
@@ -135,6 +133,92 @@
             align-items: center;
 
             gap: 10px;
+
+        }
+
+        
+
+        .risk-title { color: var(--accent-blue); }
+
+        .checklist-title { color: var(--accent-gold); }
+
+
+
+        .risk-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+            gap: 15px;
+
+        }
+
+
+
+        .risk-input-group {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 5px;
+
+        }
+
+
+
+        .risk-input-group label {
+
+            font-size: 12px;
+
+            color: var(--text-muted);
+
+            text-transform: uppercase;
+
+        }
+
+
+
+        .risk-display-box {
+
+            background-color: rgba(47, 128, 237, 0.1);
+
+            border: 1px dashed var(--accent-blue);
+
+            border-radius: 4px;
+
+            padding: 8px 12px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            color: var(--text-main);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+
+        /* Pre-Trade Checklist Panel */
+
+        .checklist-panel {
+
+            background-color: var(--card-dark);
+
+            border: 1px solid var(--accent-gold);
+
+            border-radius: 8px;
+
+            padding: 20px;
+
+            margin-bottom: 30px;
 
         }
 
@@ -444,7 +528,7 @@
 
         }
 
-        .pdf-mode .btn-delete, .pdf-mode .control-panel, .pdf-mode .checklist-panel {
+        .pdf-mode .btn-delete, .pdf-mode .control-panel, .pdf-mode .checklist-panel, .pdf-mode .risk-panel {
 
             display: none !important;
 
@@ -466,15 +550,65 @@
 
 
 
-    <!-- Pre-Trade Strategic Discipline Checklist -->
+    <!-- 1. Risk Management Configuration Dashboard -->
+
+    <div class="risk-panel">
+
+        <div class="panel-title risk-title">📊 Account Risk & Position Sizing Calculator</div>
+
+        <div class="risk-grid">
+
+            <div class="risk-input-group">
+
+                <label for="account-capital">Total Account Capital ($)</label>
+
+                <input type="number" id="account-capital" value="10000" oninput="calculateRiskParameters()" placeholder="e.g., 10000">
+
+            </div>
+
+            <div class="risk-input-group">
+
+                <label for="risk-percent">Risk Per Trade (%)</label>
+
+                <input type="number" id="risk-percent" value="1" min="0.1" max="100" step="0.1" oninput="calculateRiskParameters()" placeholder="e.g., 1">
+
+            </div>
+
+            <div class="risk-input-group">
+
+                <label for="stop-loss-distance">Stop Loss Distance ($ or Points)</label>
+
+                <input type="number" id="stop-loss-distance" value="100" oninput="calculateRiskParameters()" placeholder="Distance to Stop Loss">
+
+            </div>
+
+            <div class="risk-input-group">
+
+                <label>Maximum Cash Allowed Risk</label>
+
+                <div id="calc-cash-risk" class="risk-display-box">$100.00</div>
+
+            </div>
+
+            <div class="risk-input-group">
+
+                <label>Automated Position Size</label>
+
+                <div id="calc-position-size" class="risk-display-box" style="color: var(--accent-green);">1.00 Units</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- 2. Simplified Pre-Trade Rules Checklist -->
 
     <div class="checklist-panel">
 
-        <div class="checklist-title">
-
-            ⚔️ Pre-Trade Rules of Engagement (Verify Before Entry)
-
-        </div>
+        <div class="checklist-title panel-title">⚔️ Pre-Trade Checklist (Verify Before Adding)</div>
 
         <div class="checklist-grid">
 
@@ -484,9 +618,9 @@
 
                 <label for="chk-trend">
 
-                    HTF HTF Context & Edge Verified
+                    1. Check the Main Trend
 
-                    <span>Is this entry aligned with Higher Timeframe structure, or am I fighting macro momentum?</span>
+                    <span>Am I trading with the big picture trend, or am I fighting against it?</span>
 
                 </label>
 
@@ -498,9 +632,9 @@
 
                 <label for="chk-news">
 
-                    High-Impact News Impact Check
+                    2. Check the News Calendar
 
-                    <span>Are there major macroeconomic data releases scheduled within the next hour that could induce toxic volatility?</span>
+                    <span>Is there any big news coming out in the next hour that could shock the market?</span>
 
                 </label>
 
@@ -512,9 +646,9 @@
 
                 <label for="chk-rr">
 
-                    Mathematical Risk-to-Reward Ratio
+                    3. Good Risk vs. Reward
 
-                    <span>Is my target technically viable, yielding at least a 1:2 premium ratio relative to my invalidation level?</span>
+                    <span>Is my profit target at least double (2x) the size of my potential loss?</span>
 
                 </label>
 
@@ -526,9 +660,9 @@
 
                 <label for="chk-size">
 
-                    Strict Capital Risk Sizing
+                    4. Safe Position Size
 
-                    <span>Is my position size calculated precisely based on my stop loss so I lose no more than 1-2% max capital?</span>
+                    <span>Did I use the automated size calculated above to protect my account capital?</span>
 
                 </label>
 
@@ -540,9 +674,9 @@
 
                 <label for="chk-state">
 
-                    Emotional & Physiological Equilibrium
+                    5. Clear Mindset Check
 
-                    <span>Am I chasing a previous loss, trading out of boredom, or executing with absolute neutral objectivity?</span>
+                    <span>Am I completely calm, or am I trading out of boredom, anger, or revenge?</span>
 
                 </label>
 
@@ -554,9 +688,9 @@
 
                 <label for="chk-plan">
 
-                    Ironclad Invalidation Plan
+                    6. Strict Exit Plan
 
-                    <span>Do I know exactly where my terminal exit point is if the technical thesis fails, or will I freeze?</span>
+                    <span>Do I know exactly where my Stop Loss is, and will I let the system close it if I am wrong?</span>
 
                 </label>
 
@@ -638,15 +772,17 @@
 
                         <th style="width: 10%;">Trade ID</th>
 
-                        <th style="width: 20%;">Asset / Pair</th>
+                        <th style="width: 15%;">Asset / Pair</th>
 
                         <th style="width: 15%;">Direction</th>
 
+                        <th style="width: 15%;">Calculated Size</th>
+
                         <th style="width: 15%;">Outcome</th>
 
-                        <th style="width: 25%;">Net PnL ($)</th>
+                        <th style="width: 15%;">Net PnL ($)</th>
 
-                        <th class="action-header" style="width: 15%;">Actions</th>
+                        <th class="action-header" style="width: 10%;">Actions</th>
 
                     </tr>
 
@@ -672,11 +808,61 @@
 
     document.addEventListener('DOMContentLoaded', () => {
 
+        // Load stored risk metrics if they exist
+
+        document.getElementById('account-capital').value = localStorage.getItem('shinobi_capital') || 10000;
+
+        document.getElementById('risk-percent').value = localStorage.getItem('shinobi_risk_pc') || 1;
+
+        document.getElementById('stop-loss-distance').value = localStorage.getItem('shinobi_sl_dist') || 100;
+
+        
+
+        calculateRiskParameters();
+
         renderTable();
 
         calculateMetrics();
 
     });
+
+
+
+    function calculateRiskParameters() {
+
+        const capital = parseFloat(document.getElementById('account-capital').value) || 0;
+
+        const riskPercent = parseFloat(document.getElementById('risk-percent').value) || 0;
+
+        const stopDistance = parseFloat(document.getElementById('stop-loss-distance').value) || 0;
+
+
+
+        // Save layout settings locally
+
+        localStorage.setItem('shinobi_capital', capital);
+
+        localStorage.setItem('shinobi_risk_pc', riskPercent);
+
+        localStorage.setItem('shinobi_sl_dist', stopDistance);
+
+
+
+        const cashRisk = capital * (riskPercent / 100);
+
+        document.getElementById('calc-cash-risk').innerText = `$${cashRisk.toFixed(2)}`;
+
+
+
+        const positionSize = stopDistance > 0 ? (cashRisk / stopDistance) : 0;
+
+        document.getElementById('calc-position-size').innerText = `${positionSize.toFixed(4)} Units`;
+
+        
+
+        return positionSize.toFixed(4);
+
+    }
 
 
 
@@ -698,7 +884,7 @@
 
         if (tradeDatabase.length === 0) {
 
-            tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted);">No executions logged. Clear the checklist parameters above and deploy a trade.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted);">No trades logged. Complete the risk calculator and check options above to add an entry.</td></tr>`;
 
             return;
 
@@ -728,6 +914,8 @@
 
                 </td>
 
+                <td><input type="text" value="${trade.size || '0.0000'}" onchange="updateCell(${index}, 'size', this.value)" placeholder="Size"></td>
+
                 <td>
 
                     <select onchange="updateCell(${index}, 'outcome', this.value)">
@@ -756,8 +944,6 @@
 
     function addNewRow() {
 
-        // Enforce checklist rules for behavioral discipline
-
         const checkboxes = document.querySelectorAll('.checklist-grid input[type="checkbox"]');
 
         let allChecked = true;
@@ -768,7 +954,7 @@
 
         if(!allChecked) {
 
-            alert("⚠️ SYSTEM VIOLATION: You cannot open an execution until every metric on the Pre-Trade Checklist is verified. Do not gamble.");
+            alert("⚠️ RULES VIOLATION: You cannot add a trade until you check every rule on the list. Protect your capital.");
 
             return;
 
@@ -776,7 +962,25 @@
 
 
 
-        tradeDatabase.push({ asset: '', direction: 'LONG', outcome: 'WIN', pnl: 0 });
+        const calculatedSize = calculateRiskParameters();
+
+
+
+        tradeDatabase.push({ 
+
+            asset: '', 
+
+            direction: 'LONG', 
+
+            size: calculatedSize + ' Units', 
+
+            outcome: 'WIN', 
+
+            pnl: 0 
+
+        });
+
+        
 
         saveToLocalStorage();
 
@@ -786,7 +990,7 @@
 
 
 
-        // Reset checks after passing to enforce it for the next execution
+        // Clear checkboxes to force evaluation for the next setup
 
         checkboxes.forEach(cb => cb.checked = false);
 
@@ -874,13 +1078,13 @@
 
     function exportToCSV() {
 
-        if (tradeDatabase.length === 0) return alert("No data available.");
+        if (tradeDatabase.length === 0) return alert("No data to save.");
 
-        let csvContent = "data:text/csv;charset=utf-8,Trade ID,Asset/Pair,Direction,Outcome,Net PnL ($)\n";
+        let csvContent = "data:text/csv;charset=utf-8,Trade ID,Asset/Pair,Direction,Position Size,Outcome,Net PnL ($)\n";
 
         tradeDatabase.forEach((t, i) => {
 
-            csvContent += `T-${String(i+1).padStart(2,'0')},${t.asset},${t.direction},${t.outcome},${t.pnl}\n`;
+            csvContent += `T-${String(i+1).padStart(2,'0')},${t.asset},${t.direction},${t.size},${t.outcome},${t.pnl}\n`;
 
         });
 
@@ -904,7 +1108,7 @@
 
     function exportToPDF() {
 
-        if (tradeDatabase.length === 0) return alert("No data available.");
+        if (tradeDatabase.length === 0) return alert("No data to save.");
 
         const element = document.getElementById('report-area');
 
@@ -924,11 +1128,13 @@
 
                 row.cells[2].innerHTML = `<span>${data.direction}</span>`;
 
-                row.cells[3].innerHTML = `<span class="${data.outcome === 'WIN' ? 'text-win' : 'text-loss'}">${data.outcome}</span>`;
+                row.cells[3].innerHTML = `<span>${data.size}</span>`;
 
-                row.cells[4].innerHTML = `<span class="${data.pnl >= 0 ? 'text-win' : 'text-loss'}">${data.pnl}</span>`;
+                row.cells[4].innerHTML = `<span class="${data.outcome === 'WIN' ? 'text-win' : 'text-loss'}">${data.outcome}</span>`;
 
-                row.cells[5].style.display = 'none';
+                row.cells[5].innerHTML = `<span class="${data.pnl >= 0 ? 'text-win' : 'text-loss'}">${data.pnl}</span>`;
+
+                row.cells[6].style.display = 'none';
 
             }
 
