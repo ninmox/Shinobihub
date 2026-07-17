@@ -8,109 +8,349 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SHINOBI TRADING HUB v1.0</title>
+    <title>Shinobi Master Session Journal</title>
+
+    <!-- Include html2pdf.js library for premium client-side PDF generation -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
 
         :root {
 
-            --bg-main: #0B0F19;
+            --bg-dark: #0d0e12;
 
-            --bg-card: #151D30;
+            --card-dark: #15171e;
 
-            --accent-red: #FF4A4A;
+            --border-color: #262936;
 
-            --accent-green: #00E676;
+            --text-main: #ffffff;
 
-            --text-main: #F5F7FA;
+            --text-muted: #848e9c;
 
-            --text-muted: #8A99AD;
+            --accent-green: #0ecb81;
 
-            --border: #24324F;
+            --accent-red: #f6465d;
+
+            --accent-blue: #2f80ed;
+
+            --accent-purple: #9b51e0;
 
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 
-        body { background-color: var(--bg-main); color: var(--text-main); padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
 
-        .container { width: 100%; max-width: 1100px; display: flex; flex-direction: column; gap: 30px; }
+        body {
 
-        
+            background-color: var(--bg-dark);
 
-        /* Callout Box */
+            color: var(--text-main);
 
-        .callout { background: linear-gradient(135deg, #1A1A2E, #16213E); border-left: 5px solid var(--accent-red); border-radius: 8px; padding: 25px; display: flex; align-items: center; gap: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
-        .callout-icon { font-size: 45px; }
+            margin: 0;
 
-        .callout-text h1 { font-size: 1.4rem; letter-spacing: 2px; color: var(--text-main); }
+            padding: 20px;
 
-        .callout-text p { font-size: 0.9rem; color: var(--text-muted); margin-top: 5px; font-family: monospace; }
+        }
 
 
 
-        /* Toggles & Checklists */
+        .container {
 
-        .grid-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+            max-width: 1200px;
 
-        .card { background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 25px; }
+            margin: 0 auto;
 
-        h2 { font-size: 1.1rem; margin-bottom: 20px; letter-spacing: 1px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
-
-        
-
-        details { background: var(--bg-main); padding: 12px; border-radius: 6px; margin-bottom: 10px; border: 1px solid var(--border); cursor: pointer; }
-
-        details summary { font-weight: 600; font-size: 0.95rem; color: #E2E8F0; }
-
-        details p { font-size: 0.85rem; color: var(--text-muted); margin-top: 8px; line-height: 1.5; }
+        }
 
 
 
-        .todo-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 0.9rem; color: #CBD5E1; cursor: pointer; }
+        h1 {
 
-        .todo-item input { width: 18px; height: 18px; accent-color: var(--accent-green); cursor: pointer; }
+            text-align: center;
 
+            color: var(--text-main);
 
+            margin-bottom: 30px;
 
-        /* Database Table */
+            font-weight: 600;
 
-        .table-wrapper { overflow-x: auto; background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+            letter-spacing: 1px;
 
-        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; }
-
-        th { color: var(--text-muted); font-weight: 600; padding: 12px; border-bottom: 2px solid var(--border); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; }
-
-        td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
-
-        input, select { background-color: var(--bg-main); border: 1px solid var(--border); color: var(--text-main); padding: 6px 10px; border-radius: 4px; width: 100%; font-size: 0.85rem; }
-
-        input:focus, select:focus { border-color: var(--text-muted); outline: none; }
-
-        
-
-        .btn { background-color: var(--accent-red); color: white; border: none; padding: 10px 20px; font-weight: 600; border-radius: 4px; cursor: pointer; transition: 0.2s; font-size: 0.85rem; }
-
-        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
-
-        .btn-add { background-color: transparent; border: 1px dashed var(--text-muted); color: var(--text-muted); width: 100%; padding: 12px; border-radius: 6px; margin-top: 15px; font-weight: 600; cursor: pointer; }
-
-        .btn-add:hover { border-color: var(--text-main); color: var(--text-main); }
-
-        .delete-btn { color: var(--accent-red); background: none; border: none; font-weight: bold; cursor: pointer; font-size: 1.1rem; text-align: center; width: 100%; }
+        }
 
 
 
-        /* Footer Armor Anchor */
+        /* Printable Area Wrapper */
 
-        .footer-banner { background: linear-gradient(135deg, #111, #222); border: 1px solid #333; border-radius: 8px; padding: 20px; text-align: center; margin-top: 10px; }
+        #report-area {
 
-        .footer-banner p { font-size: 0.9rem; color: #CCC; margin-bottom: 12px; }
+            padding: 10px;
 
-        .footer-banner a { color: var(--accent-red); font-weight: bold; text-decoration: none; font-size: 0.95rem; letter-spacing: 1px; }
+            background-color: var(--bg-dark);
 
-        .footer-banner a:hover { text-decoration: underline; }
+        }
+
+
+
+        .analytics-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+            gap: 15px;
+
+            margin-bottom: 30px;
+
+        }
+
+
+
+        .card {
+
+            background-color: var(--card-dark);
+
+            border: 1px solid var(--border-color);
+
+            border-radius: 8px;
+
+            padding: 20px;
+
+            text-align: center;
+
+        }
+
+
+
+        .card-title {
+
+            color: var(--text-muted);
+
+            font-size: 12px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 10px;
+
+            letter-spacing: 0.5px;
+
+        }
+
+
+
+        .card-value {
+
+            font-size: 24px;
+
+            font-weight: bold;
+
+        }
+
+
+
+        .control-panel {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+
+        .btn-group {
+
+            display: flex;
+
+            gap: 10px;
+
+        }
+
+
+
+        .btn {
+
+            color: white;
+
+            border: none;
+
+            padding: 12px 20px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-weight: 600;
+
+            font-size: 14px;
+
+            transition: opacity 0.2s;
+
+        }
+
+
+
+        .btn:hover {
+
+            opacity: 0.9;
+
+        }
+
+
+
+        .btn-add { background-color: var(--accent-blue); }
+
+        .btn-csv { background-color: var(--accent-green); }
+
+        .btn-pdf { background-color: var(--accent-purple); }
+
+
+
+        .table-container {
+
+            overflow-x: auto;
+
+            background-color: var(--card-dark);
+
+            border: 1px solid var(--border-color);
+
+            border-radius: 8px;
+
+        }
+
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            text-align: left;
+
+        }
+
+
+
+        th, td {
+
+            padding: 14px 16px;
+
+            border-bottom: 1px solid var(--border-color);
+
+            font-size: 14px;
+
+        }
+
+
+
+        th {
+
+            background-color: #1c1f2a;
+
+            color: var(--text-muted);
+
+            font-weight: 500;
+
+        }
+
+
+
+        input, select {
+
+            background-color: var(--bg-dark);
+
+            color: var(--text-main);
+
+            border: 1px solid var(--border-color);
+
+            padding: 8px 12px;
+
+            border-radius: 4px;
+
+            width: 100%;
+
+            box-sizing: border-box;
+
+        }
+
+
+
+        input:focus, select:focus {
+
+            border-color: var(--accent-blue);
+
+            outline: none;
+
+        }
+
+
+
+        .btn-delete {
+
+            background-color: transparent;
+
+            color: var(--accent-red);
+
+            border: 1px solid var(--accent-red);
+
+            padding: 6px 10px;
+
+            border-radius: 4px;
+
+            cursor: pointer;
+
+        }
+
+
+
+        .btn-delete:hover {
+
+            background-color: rgba(246, 70, 93, 0.1);
+
+        }
+
+
+
+        .text-win { color: var(--accent-green) !important; font-weight: bold; }
+
+        .text-loss { color: var(--accent-red) !important; font-weight: bold; }
+
+
+
+        /* PDF Generation Overrides */
+
+        .pdf-mode input, .pdf-mode select {
+
+            border: none !important;
+
+            background: transparent !important;
+
+            color: var(--text-main) !important;
+
+            padding: 0 !important;
+
+            appearance: none;
+
+            -webkit-appearance: none;
+
+        }
+
+        .pdf-mode .btn-delete, .pdf-mode .control-panel {
+
+            display: none !important;
+
+        }
 
     </style>
 
@@ -122,97 +362,19 @@
 
 <div class="container">
 
-
-
-    <!-- System Banner -->
-
-    <div class="callout">
-
-        <div class="callout-icon">💀</div>
-
-        <div class="callout-text">
-
-            <h1>/ SHINOBI TRADING HUB v1.0</h1>
-
-            <p>System Status: ACTIVE | Risk Engine: OPERATIONAL | Core Bias: TRACK AND EXECUTE</p>
-
-        </div>
-
-    </div>
+    <h1>SHINOBI MASTER SESSION JOURNAL</h1>
 
 
 
-    <!-- Mindset & Checklist Grid -->
+    <div class="control-panel">
 
-    <div class="grid-sections">
+        <button class="btn btn-add" onclick="addNewRow()">+ Add New Trade</button>
 
-        <!-- 5 Sins Toggles -->
+        <div class="btn-group">
 
-        <div class="card">
+            <button class="btn btn-csv" onclick="exportToCSV()">Download CSV</button>
 
-            <h2>📜 THE SHINOBI MINDSET: 5 UNFORGIVABLE SINS</h2>
-
-            
-
-            <details>
-
-                <summary>1. Over-Leveraging (The Seppuku Condition)</summary>
-
-                <p>Risking more than 2% per trade is financial suicide. If one bad trade destabilizes your psychology, your position sizing is fundamentally flawed.</p>
-
-            </details>
-
-            <details>
-
-                <summary>2. Chasing the Momentum Leg (FOMO)</summary>
-
-                <p>Entering a trade because a candle is moving fast means you are providing exit liquidity for institutional algorithms. Enter at premium/discount zones, or don't enter at all.</p>
-
-            </details>
-
-            <details>
-
-                <summary>3. Moving the Stop Loss</summary>
-
-                <p>Invalidating your original trade parameters mid-session is a symptom of emotional cowardice. Accept the initial calculated risk. Let the stop hit or let the target hit. No exceptions.</p>
-
-            </details>
-
-            <details>
-
-                <summary>4. Revenge Trading</summary>
-
-                <p>Attempting to "make back" capital from the market after a loss forces chaotic, emotional execution. A loss is data. Treat it as an operating expense, step away from the terminal, and wait for the next setup session.</p>
-
-            </details>
-
-            <details>
-
-                <summary>5. Failing to Journal (Blind Execution)</summary>
-
-                <p>Operating without hard data metrics means you are a gambler disguised as a technician. If you cannot analyze your historical execution flaws, you have no statistical edge.</p>
-
-            </details>
-
-        </div>
-
-
-
-        <!-- Pre-Flight Checklist -->
-
-        <div class="card">
-
-            <h2>⚔️ PRE-FLIGHT RITUAL</h2>
-
-            <label class="todo-item"><input type="checkbox"> Higher Time Frame (HTF) market bias identified and marked.</label>
-
-            <label class="todo-item"><input type="checkbox"> Economic high-impact calendar events checked.</label>
-
-            <label class="todo-item"><input type="checkbox"> Key daily/weekly liquidity pools mapped out on the charts.</label>
-
-            <label class="todo-item"><input type="checkbox"> Hardware terminal and internet connection integrity confirmed.</label>
-
-            <label class="todo-item"><input type="checkbox"> Maximum daily drawdown threshold hard-coded into memory.</label>
+            <button class="btn btn-pdf" onclick="exportToPDF()">Download PDF Report</button>
 
         </div>
 
@@ -220,65 +382,87 @@
 
 
 
-    <!-- Execution Engine Table -->
+    <!-- Wrap everything that goes into the document report -->
 
-    <div class="table-wrapper">
+    <div id="report-area">
 
-        <h2>📊 SESSION EXECUTION JOURNAL</h2>
+        <!-- Analytics Dashboard -->
 
-        <table>
+        <div class="analytics-grid">
 
-            <thead>
+            <div class="card">
 
-                <tr>
+                <div class="card-title">Total Trades Executed</div>
 
-                    <th style="width: 15%;">Trade ID</th>
+                <div id="metric-total-trades" class="card-value">0</div>
 
-                    <th style="width: 12%;">Asset / Ticker</th>
+            </div>
 
-                    <th style="width: 12%;">Direction</th>
+            <div class="card">
 
-                    <th style="width: 15%;">Setup Strategy</th>
+                <div class="card-title">Total Win Rate (%)</div>
 
-                    <th style="width: 10%;">Risk Matrix (%)</th>
+                <div id="metric-win-rate" class="card-value">0%</div>
 
-                    <th style="width: 10%;">R:R Ratio</th>
+            </div>
 
-                    <th style="width: 12%;">Outcome</th>
+            <div class="card">
 
-                    <th style="width: 10%;">Net PnL</th>
+                <div class="card-title">Net Accumulated PnL</div>
 
-                    <th style="width: 14%;">Actions</th>
+                <div id="metric-net-pnl" class="card-value">0</div>
 
-                </tr>
+            </div>
 
-            </thead>
+            <div class="card">
 
-            <tbody id="table-body">
+                <div class="card-title">Average Profit Factor</div>
 
-                <!-- Rows injected dynamically via JS -->
+                <div id="metric-profit-factor" class="card-value">0.00</div>
 
-            </tbody>
+            </div>
 
-        </table>
+        </div>
 
-        <button class="btn-add" id="add-row-btn">+ Add New Trade Execution Row</button>
+
+
+        <!-- Journal Table -->
+
+        <div class="table-container">
+
+            <table id="journal-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th style="width: 10%;">Trade ID</th>
+
+                        <th style="width: 20%;">Asset / Pair</th>
+
+                        <th style="width: 15%;">Direction</th>
+
+                        <th style="width: 15%;">Outcome</th>
+
+                        <th style="width: 25%;">Net PnL ($)</th>
+
+                        <th class="action-header" style="width: 15%;">Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="journal-tbody">
+
+                    <!-- Rows injected dynamically -->
+
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
-
-
-
-    <!-- Monetization Footer -->
-
-    <div class="footer-banner">
-
-        <p>The execution engine is clean, now secure the armor. Access limited edition street fits, heavy hoodies, and high-performance desk mats.</p>
-
-        <a href="YOUR_STORE_LINK_HERE" target="_blank">👉 [ ⚔️ ACCESS THE SHINOBI APPAREL COLLECTION ]</a>
-
-    </div>
-
-
 
 </div>
 
@@ -286,127 +470,69 @@
 
 <script>
 
-    const tableBody = document.getElementById('table-body');
-
-    const addRowBtn = document.getElementById('add-row-btn');
-
-    
-
-    const GOOGLE_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyirhjV2AbmoTCLcSJxVKW8RIyjgbV9LHDnCeqB8iBF4nKtXxpk_Rp_PXCfwNdI9D2nmQ/exec";
+    let tradeDatabase = JSON.parse(localStorage.getItem('shinobi_journal_data')) || [];
 
 
 
-    let journalData = JSON.parse(localStorage.getItem('shinobi_journal')) || [
+    document.addEventListener('DOMContentLoaded', () => {
 
-        { id: 'T-01', ticker: 'BTC/USD', dir: 'LONG', strategy: 'SMC/AMD', risk: '1', rr: '3', outcome: 'WIN', pnl: '300' }
+        renderTable();
 
-    ];
+        calculateMetrics();
+
+    });
 
 
 
     function saveToLocalStorage() {
 
-        localStorage.setItem('shinobi_journal', JSON.stringify(journalData));
+        localStorage.setItem('shinobi_journal_data', JSON.stringify(tradeDatabase));
 
     }
 
 
 
-    window.updateData = function(index, key, value) {
+    function renderTable() {
 
-        journalData[index][key] = value;
+        const tbody = document.getElementById('journal-tbody');
 
-        saveToLocalStorage();
-
-    };
+        tbody.innerHTML = '';
 
 
 
-    window.deleteRow = function(index) {
+        if (tradeDatabase.length === 0) {
 
-        journalData.splice(index, 1);
+            tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted);">No trades logged in this session. Add a trade above to get started.</td></tr>`;
 
-        saveToLocalStorage();
-
-        renderTable();
-
-    };
-
-
-
-    window.syncRowToGoogleSheets = async function(index, buttonElement) {
-
-        const rowData = journalData[index];
-
-        const originalText = buttonElement.innerText;
-
-        
-
-        buttonElement.innerText = "Syncing...";
-
-        buttonElement.disabled = true;
-
-
-
-        try {
-
-            await fetch(GOOGLE_WEB_APP_URL, {
-
-                method: "POST",
-
-                mode: "no-cors", 
-
-                headers: { "Content-Type": "application/json" },
-
-                body: JSON.stringify(rowData)
-
-            });
-
-
-
-            buttonElement.innerText = "✓ Synced";
-
-            buttonElement.style.backgroundColor = "#4A5568"; 
-
-        } catch (error) {
-
-            console.error("Sync failed:", error);
-
-            alert("Transmission Error. Check browser console for details.");
-
-            buttonElement.innerText = originalText;
-
-            buttonElement.disabled = false;
+            return;
 
         }
 
-    };
 
 
+        tradeDatabase.forEach((trade, index) => {
 
-    function renderTable() {
+            const row = document.createElement('tr');
 
-        tableBody.innerHTML = '';
+            
 
-        journalData.forEach((row, index) => {
+            row.innerHTML = `
 
-            const tr = document.createElement('tr');
-
-            tr.innerHTML = `
-
-                <td><input type="text" value="${row.id}" onchange="updateData(${index}, 'id', this.value)"></td>
+                <td><strong>T-${String(index + 1).padStart(2, '0')}</strong></td>
 
                 <td>
 
-                    <select onchange="updateData(${index}, 'ticker', this.value)">
+                    <input type="text" value="${trade.asset}" onchange="updateCell(${index}, 'asset', this.value)" placeholder="e.g., BTCUSDT">
 
-                        <option value="BTC/USD" ${row.ticker==='BTC/USD'?'selected':''}>BTC/USD</option>
+                </td>
 
-                        <option value="ETH/USD" ${row.ticker==='ETH/USD'?'selected':''}>ETH/USD</option>
+                <td>
 
-                        <option value="NIFTY" ${row.ticker==='NIFTY'?'selected':''}>NIFTY</option>
+                    <select onchange="updateCell(${index}, 'direction', this.value)">
 
-                        <option value="BANKNIFTY" ${row.ticker==='BANKNIFTY'?'selected':''}>BANKNIFTY</option>
+                        <option value="LONG" ${trade.direction === 'LONG' ? 'selected' : ''}>LONG 🟢</option>
+
+                        <option value="SHORT" ${trade.direction === 'SHORT' ? 'selected' : ''}>SHORT 🔴</option>
 
                     </select>
 
@@ -414,53 +540,31 @@
 
                 <td>
 
-                    <select onchange="updateData(${index}, 'dir', this.value)">
+                    <select onchange="updateCell(${index}, 'outcome', this.value)">
 
-                        <option value="LONG" ${row.dir==='LONG'?'selected':''}>🟢 LONG</option>
+                        <option value="WIN" ${trade.outcome === 'WIN' ? 'selected' : ''}>🏆 WIN</option>
 
-                        <option value="SHORT" ${row.dir==='SHORT'?'selected':''}>🔴 SHORT</option>
-
-                    </select>
-
-                </td>
-
-                <td><input type="text" value="${row.strategy}" onchange="updateData(${index}, 'strategy', this.value)"></td>
-
-                <td><input type="number" step="0.1" value="${row.risk}" onchange="updateData(${index}, 'risk', this.value)"></td>
-
-                <td><input type="number" step="0.5" value="${row.rr}" onchange="updateData(${index}, 'rr', this.value)"></td>
-
-                <td>
-
-                    <select onchange="updateData(${index}, 'outcome', this.value)">
-
-                        <option value="WIN" ${row.outcome==='WIN'?'selected':''}>🏆 WIN</option>
-
-                        <option value="LOSS" ${row.outcome==='LOSS'?'selected':''}>💀 LOSS</option>
-
-                        <option value="BREAK-EVEN" ${row.outcome==='BREAK-EVEN'?'selected':''}>⚖️ BE</option>
+                        <option value="LOSS" ${trade.outcome === 'LOSS' ? 'selected' : ''}>💀 LOSS</option>
 
                     </select>
 
                 </td>
 
-                <td><input type="number" value="${row.pnl}" onchange="updateData(${index}, 'pnl', this.value)"></td>
-
                 <td>
 
-                    <div style="display: flex; gap: 5px;">
+                    <input type="number" value="${trade.pnl}" onchange="updateCell(${index}, 'pnl', this.value)" placeholder="0.00">
 
-                        <button class="btn" style="background-color: var(--accent-green); padding: 4px 8px; font-size: 0.75rem;" onclick="syncRowToGoogleSheets(${index}, this)">Sync</button>
+                </td>
 
-                        <button class="delete-btn" style="width: auto;" onclick="deleteRow(${index})">×</button>
+                <td class="action-cell">
 
-                    </div>
+                    <button class="btn-delete" onclick="deleteRow(${index})">Delete</button>
 
                 </td>
 
             `;
 
-            tableBody.appendChild(tr);
+            tbody.appendChild(row);
 
         });
 
@@ -468,21 +572,209 @@
 
 
 
-    addRowBtn.addEventListener('click', () => {
+    function addNewRow() {
 
-        const nextNum = journalData.length + 1;
-
-        journalData.push({ id: `T-0${nextNum}`, ticker: 'BTC/USD', dir: 'LONG', strategy: '', risk: '1', rr: '2', outcome: 'WIN', pnl: '0' });
+        tradeDatabase.push({ asset: '', direction: 'LONG', outcome: 'WIN', pnl: 0 });
 
         saveToLocalStorage();
 
         renderTable();
 
-    });
+        calculateMetrics();
+
+    }
 
 
 
-    renderTable();
+    function updateCell(index, key, value) {
+
+        if (key === 'pnl') {
+
+            tradeDatabase[index][key] = parseFloat(value) || 0;
+
+        } else {
+
+            tradeDatabase[index][key] = value;
+
+        }
+
+        saveToLocalStorage();
+
+        calculateMetrics();
+
+    }
+
+
+
+    function deleteRow(index) {
+
+        tradeDatabase.splice(index, 1);
+
+        saveToLocalStorage();
+
+        renderTable();
+
+        calculateMetrics();
+
+    }
+
+
+
+    function calculateMetrics() {
+
+        const totalTrades = tradeDatabase.length;
+
+        let totalWins = 0, netPnL = 0, grossProfits = 0, grossLosses = 0;
+
+
+
+        tradeDatabase.forEach(trade => {
+
+            netPnL += trade.pnl;
+
+            if (trade.outcome === 'WIN') {
+
+                totalWins++;
+
+                if (trade.pnl > 0) grossProfits += trade.pnl;
+
+            } else if (trade.outcome === 'LOSS') {
+
+                grossLosses += trade.pnl < 0 ? Math.abs(trade.pnl) : trade.pnl;
+
+            }
+
+        });
+
+
+
+        const winRate = totalTrades > 0 ? Math.round((totalWins / totalTrades) * 100) : 0;
+
+        const profitFactor = grossLosses > 0 ? (grossProfits / grossLosses).toFixed(2) : (grossProfits > 0 ? grossProfits.toFixed(2) : "0.00");
+
+
+
+        document.getElementById('metric-total-trades').innerText = totalTrades;
+
+        document.getElementById('metric-win-rate').innerText = `${winRate}%`;
+
+        document.getElementById('metric-net-pnl').innerText = netPnL;
+
+        document.getElementById('metric-profit-factor').innerText = profitFactor;
+
+        
+
+        const pnlElement = document.getElementById('metric-net-pnl');
+
+        pnlElement.className = 'card-value ' + (netPnL > 0 ? 'text-win' : (netPnL < 0 ? 'text-loss' : ''));
+
+    }
+
+
+
+    // Engine: Export Ledger to clean CSV File
+
+    function exportToCSV() {
+
+        if (tradeDatabase.length === 0) return alert("No data to export!");
+
+        
+
+        let csvContent = "data:text/csv;charset=utf-8,Trade ID,Asset/Pair,Direction,Outcome,Net PnL ($)\n";
+
+        tradeDatabase.forEach((t, i) => {
+
+            csvContent += `T-${String(i+1).padStart(2,'0')},${t.asset},${t.direction},${t.outcome},${t.pnl}\n`;
+
+        });
+
+        
+
+        const encodedUri = encodeURI(csvContent);
+
+        const link = document.createElement("a");
+
+        link.setAttribute("href", encodedUri);
+
+        link.setAttribute("download", `shinobi_trading_session_${new Date().toISOString().slice(0,10)}.csv`);
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+
+    }
+
+
+
+    // Engine: Print Premium PDF Document from UI View
+
+    function exportToPDF() {
+
+        if (tradeDatabase.length === 0) return alert("No data to export!");
+
+        
+
+        const element = document.getElementById('report-area');
+
+        
+
+        // Temporarily transform inputs to clean text strings for seamless printing
+
+        const rows = element.querySelectorAll('tbody tr');
+
+        rows.forEach((row, index) => {
+
+            const data = tradeDatabase[index];
+
+            if(data) {
+
+                row.cells[1].innerHTML = `<span>${data.asset || 'N/A'}</span>`;
+
+                row.cells[2].innerHTML = `<span>${data.direction}</span>`;
+
+                row.cells[3].innerHTML = `<span class="${data.outcome === 'WIN' ? 'text-win' : 'text-loss'}">${data.outcome}</span>`;
+
+                row.cells[4].innerHTML = `<span class="${data.pnl >= 0 ? 'text-win' : 'text-loss'}">${data.pnl}</span>`;
+
+                row.cells[5].style.display = 'none'; // Hide actions column entirely
+
+            }
+
+        });
+
+        element.querySelector('.action-header').style.display = 'none';
+
+
+
+        const opt = {
+
+            margin:       15,
+
+            filename:     `shinobi_performance_report_${new Date().toISOString().slice(0,10)}.pdf`,
+
+            image:        { type: 'jpeg', quality: 0.98 },
+
+            html2canvas:  { scale: 2, backgroundColor: '#0d0e12', useCORS: true },
+
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
+
+        };
+
+
+
+        html2pdf().set(opt).from(element).save().then(() => {
+
+            // Restore UI inputs back to interactive state post-rendering
+
+            renderTable();
+
+            calculateMetrics();
+
+        });
+
+    }
 
 </script>
 
