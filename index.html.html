@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SHINOBI TRADING HUB v1.0</title>
+
+    <style>
+
+        :root {
+
+            --bg-main: #0B0F19;
+
+            --bg-card: #151D30;
+
+            --accent-red: #FF4A4A;
+
+            --accent-green: #00E676;
+
+            --text-main: #F5F7FA;
+
+            --text-muted: #8A99AD;
+
+            --border: #24324F;
+
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+        body { background-color: var(--bg-main); color: var(--text-main); padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
+
+        .container { width: 100%; max-width: 1100px; display: flex; flex-direction: column; gap: 30px; }
+
+        
+
+        /* Callout Box */
+
+        .callout { background: linear-gradient(135deg, #1A1A2E, #16213E); border-left: 5px solid var(--accent-red); border-radius: 8px; padding: 25px; display: flex; align-items: center; gap: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+        .callout-icon { font-size: 45px; }
+
+        .callout-text h1 { font-size: 1.4rem; letter-spacing: 2px; color: var(--text-main); }
+
+        .callout-text p { font-size: 0.9rem; color: var(--text-muted); margin-top: 5px; font-family: monospace; }
+
+
+
+        /* Toggles & Checklists */
+
+        .grid-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+        .card { background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 25px; }
+
+        h2 { font-size: 1.1rem; margin-bottom: 20px; letter-spacing: 1px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+
+        
+
+        details { background: var(--bg-main); padding: 12px; border-radius: 6px; margin-bottom: 10px; border: 1px solid var(--border); cursor: pointer; }
+
+        details summary { font-weight: 600; font-size: 0.95rem; color: #E2E8F0; }
+
+        details p { font-size: 0.85rem; color: var(--text-muted); margin-top: 8px; line-height: 1.5; }
+
+
+
+        .todo-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 0.9rem; color: #CBD5E1; cursor: pointer; }
+
+        .todo-item input { width: 18px; height: 18px; accent-color: var(--accent-green); cursor: pointer; }
+
+
+
+        /* Database Table */
+
+        .table-wrapper { overflow-x: auto; background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; }
+
+        th { color: var(--text-muted); font-weight: 600; padding: 12px; border-bottom: 2px solid var(--border); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; }
+
+        td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+
+        input, select { background-color: var(--bg-main); border: 1px solid var(--border); color: var(--text-main); padding: 6px 10px; border-radius: 4px; width: 100%; font-size: 0.85rem; }
+
+        input:focus, select:focus { border-color: var(--text-muted); outline: none; }
+
+        
+
+        .btn { background-color: var(--accent-red); color: white; border: none; padding: 10px 20px; font-weight: 600; border-radius: 4px; cursor: pointer; transition: 0.2s; font-size: 0.85rem; }
+
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        .btn-add { background-color: transparent; border: 1px dashed var(--text-muted); color: var(--text-muted); width: 100%; padding: 12px; border-radius: 6px; margin-top: 15px; font-weight: 600; cursor: pointer; }
+
+        .btn-add:hover { border-color: var(--text-main); color: var(--text-main); }
+
+        .delete-btn { color: var(--accent-red); background: none; border: none; font-weight: bold; cursor: pointer; font-size: 1.1rem; text-align: center; width: 100%; }
+
+
+
+        /* Footer Armor Anchor */
+
+        .footer-banner { background: linear-gradient(135deg, #111, #222); border: 1px solid #333; border-radius: 8px; padding: 20px; text-align: center; margin-top: 10px; }
+
+        .footer-banner p { font-size: 0.9rem; color: #CCC; margin-bottom: 12px; }
+
+        .footer-banner a { color: var(--accent-red); font-weight: bold; text-decoration: none; font-size: 0.95rem; letter-spacing: 1px; }
+
+        .footer-banner a:hover { text-decoration: underline; }
+
+    </style>
+
+</head>
+
+<body>
+
+
+
+<div class="container">
+
+
+
+    <!-- System Banner -->
+
+    <div class="callout">
+
+        <div class="callout-icon">💀</div>
+
+        <div class="callout-text">
+
+            <h1>/ SHINOBI TRADING HUB v1.0</h1>
+
+            <p>System Status: ACTIVE | Risk Engine: OPERATIONAL | Core Bias: TRACK AND EXECUTE</p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Mindset & Checklist Grid -->
+
+    <div class="grid-sections">
+
+        <!-- 5 Sins Toggles -->
+
+        <div class="card">
+
+            <h2>📜 THE SHINOBI MINDSET: 5 UNFORGIVABLE SINS</h2>
+
+            
+
+            <details>
+
+                <summary>1. Over-Leveraging (The Seppuku Condition)</summary>
+
+                <p>Risking more than 2% per trade is financial suicide. If one bad trade destabilizes your psychology, your position sizing is fundamentally flawed.</p>
+
+            </details>
+
+            <details>
+
+                <summary>2. Chasing the Momentum Leg (FOMO)</summary>
+
+                <p>Entering a trade because a candle is moving fast means you are providing exit liquidity for institutional algorithms. Enter at premium/discount zones, or don't enter at all.</p>
+
+            </details>
+
+            <details>
+
+                <summary>3. Moving the Stop Loss</summary>
+
+                <p>Invalidating your original trade parameters mid-session is a symptom of emotional cowardice. Accept the initial calculated risk. Let the stop hit or let the target hit. No exceptions.</p>
+
+            </details>
+
+            <details>
+
+                <summary>4. Revenge Trading</summary>
+
+                <p>Attempting to "make back" capital from the market after a loss forces chaotic, emotional execution. A loss is data. Treat it as an operating expense, step away from the terminal, and wait for the next setup session.</p>
+
+            </details>
+
+            <details>
+
+                <summary>5. Failing to Journal (Blind Execution)</summary>
+
+                <p>Operating without hard data metrics means you are a gambler disguised as a technician. If you cannot analyze your historical execution flaws, you have no statistical edge.</p>
+
+            </details>
+
+        </div>
+
+
+
+        <!-- Pre-Flight Checklist -->
+
+        <div class="card">
+
+            <h2>⚔️ PRE-FLIGHT RITUAL</h2>
+
+            <label class="todo-item"><input type="checkbox"> Higher Time Frame (HTF) market bias identified and marked.</label>
+
+            <label class="todo-item"><input type="checkbox"> Economic high-impact calendar events checked.</label>
+
+            <label class="todo-item"><input type="checkbox"> Key daily/weekly liquidity pools mapped out on the charts.</label>
+
+            <label class="todo-item"><input type="checkbox"> Hardware terminal and internet connection integrity confirmed.</label>
+
+            <label class="todo-item"><input type="checkbox"> Maximum daily drawdown threshold hard-coded into memory.</label>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Execution Engine Table -->
+
+    <div class="table-wrapper">
+
+        <h2>📊 SESSION EXECUTION JOURNAL</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th style="width: 15%;">Trade ID</th>
+
+                    <th style="width: 12%;">Asset / Ticker</th>
+
+                    <th style="width: 12%;">Direction</th>
+
+                    <th style="width: 15%;">Setup Strategy</th>
+
+                    <th style="width: 10%;">Risk Matrix (%)</th>
+
+                    <th style="width: 10%;">R:R Ratio</th>
+
+                    <th style="width: 12%;">Outcome</th>
+
+                    <th style="width: 10%;">Net PnL</th>
+
+                    <th style="width: 4%;"></th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="table-body">
+
+                <!-- Rows injected dynamically via JS -->
+
+            </tbody>
+
+        </table>
+
+        <button class="btn-add" onclick="addRow()">+ Add New Trade Execution Row</button>
+
+    </div>
+
+
+
+    <!-- Monetization Footer -->
+
+    <div class="footer-banner">
+
+        <p>The execution engine is clean, now secure the armor. Access limited edition street fits, heavy hoodies, and high-performance desk mats.</p>
+
+        <a href="YOUR_STORE_LINK_HERE" target="_blank">👉 [ ⚔️ ACCESS THE SHINOBI APPAREL COLLECTION ]</a>
+
+    </div>
+
+
+
+</div>
+
+
+
+<script>
+    const tableBody = document.getElementById('table-body');
+    
+    // ⚠️ PASTE YOUR COPIED GOOGLE WEB APP URL BETWEEN THESE QUOTES:
+    const GOOGLE_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyirhjV2AbmoTCLcSJxVKW8RIyjgbV9LHDnCeqB8iBF4nKtXxpk_Rp_PXCfwNdI9D2nmQ/exec";
+
+    // Load saved data from browser's local storage
+    let journalData = JSON.parse(localStorage.getItem('shinobi_journal')) || [
+        { id: 'T-01', ticker: 'BTC/USD', dir: 'LONG', strategy: 'SMC/AMD', risk: '1', rr: '3', outcome: 'WIN', pnl: '300' }
+    ];
+
+    function saveToLocalStorage() {
+        localStorage.setItem('shinobi_journal', JSON.stringify(journalData));
+    }
+
+    function renderTable() {
+        tableBody.innerHTML = '';
+        journalData.forEach((row, index) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><input type="text" value="${row.id}" onchange="updateData(${index}, 'id', this.value)"></td>
+                <td>
+                    <select onchange="updateData(${index}, 'ticker', this.value)">
+                        <option value="BTC/USD" ${row.ticker==='BTC/USD'?'selected':''}>BTC/USD</option>
+                        <option value="ETH/USD" ${row.ticker==='ETH/USD'?'selected':''}>ETH/USD</option>
+                        <option value="NIFTY" ${row.ticker==='NIFTY'?'selected':''}>NIFTY</option>
+                        <option value="BANKNIFTY" ${row.ticker==='BANKNIFTY'?'selected':''}>BANKNIFTY</option>
+                    </select>
+                </td>
+                <td>
+                    <select onchange="updateData(${index}, 'dir', this.value)">
+                        <option value="LONG" ${row.dir==='LONG'?'selected':''}>🟢 LONG</option>
+                        <option value="SHORT" ${row.dir==='SHORT'?'selected':''}>🔴 SHORT</option>
+                    </select>
+                </td>
+                <td><input type="text" value="${row.strategy}" onchange="updateData(${index}, 'strategy', this.value)"></td>
+                <td><input type="number" step="0.1" value="${row.risk}" onchange="updateData(${index}, 'risk', this.value)"></td>
+                <td><input type="number" step="0.5" value="${row.rr}" onchange="updateData(${index}, 'rr', this.value)"></td>
+                <td>
+                    <select onchange="updateData(${index}, 'outcome', this.value)">
+                        <option value="WIN" ${row.outcome==='WIN'?'selected':''}>🏆 WIN</option>
+                        <option value="LOSS" ${row.outcome==='LOSS'?'selected':''}>💀 LOSS</option>
+                        <option value="BREAK-EVEN" ${row.outcome==='BREAK-EVEN'?'selected':''}>⚖️ BE</option>
+                    </select>
+                </td>
+                <td><input type="number" value="${row.pnl}" onchange="updateData(${index}, 'pnl', this.value)"></td>
+                <td>
+                    <div style="display: flex; gap: 5px;">
+                        <button class="btn" style="background-color: var(--accent-green); padding: 4px 8px; font-size: 0.75rem;" onclick="syncRowToGoogleSheets(${index}, this)">Sync</button>
+                        <button class="delete-btn" style="width: auto;" onclick="deleteRow(${index})">×</button>
+                    </div>
+                </td>
+            `;
+            tableBody.appendChild(tr);
+        });
+    }
+
+    function addRow() {
+        const nextNum = journalData.length + 1;
+        journalData.push({ id: T-0${nextNum}, ticker: 'BTC/USD', dir: 'LONG', strategy: '', risk: '1', rr: '2', outcome: 'WIN', pnl: '0' });
+        saveToLocalStorage();
+        renderTable();
+    }
+
+    function updateData(index, key, value) {
+        journalData[index][key] = value;
+        saveToLocalStorage();
+    }
+
+    function deleteRow(index) {
+        journalData.splice(index, 1);
+        saveToLocalStorage();
+        renderTable();
+    }
+
+    // New Function: Fires data to your Google Sheet backend via Webhook API
+    async function syncRowToGoogleSheets(index, buttonElement) {
+        if (!GOOGLE_WEB_APP_URL || GOOGLE_WEB_APP_URL.includes("YOUR_GOOGLE_WEB_APP_URL_HERE")) {
+            alert("Configuration Error: You haven't pasted your Google Web App URL into the code yet.");
+            return;
+        }
+
+        const rowData = journalData[index];
+        const originalText = buttonElement.innerText;
+        
+        // Visual feedback during transmission
+        buttonElement.innerText = "Syncing...";
+        buttonElement.disabled = true;
+
+        try {
+            const response = await fetch(GOOGLE_WEB_APP_URL, {
+                method: "POST",
+                mode: "no-cors", // Bypasses CORS browser security blocks for Google Apps Script
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(rowData)
+            });
+
+            // Because 'no-cors' is active, the browser won't let JS read the response status,
+            // but the data will land successfully in your sheet if the URL is correct.
+            buttonElement.innerText = "✓ Synced";
+            buttonElement.style.backgroundColor = "#4A5568"; 
+        } catch (error) {
+            console.error("Sync failed:", error);
+            alert("Transmission Error. Check browser console for details.");
+            buttonElement.innerText = originalText;
+            buttonElement.disabled = false;
+        }
+    }
+
+    // Initial table load
+    renderTable();
+</script>
+
+
+
+</body>
+
+</html>
+
+
+
