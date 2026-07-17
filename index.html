@@ -10,8 +10,6 @@
 
     <title>Shinobi Master Session Journal</title>
 
-    <!-- Include html2pdf.js library for premium client-side PDF generation -->
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
@@ -35,6 +33,8 @@
             --accent-blue: #2f80ed;
 
             --accent-purple: #9b51e0;
+
+            --accent-gold: #f3ba2f;
 
         }
 
@@ -72,7 +72,7 @@
 
             color: var(--text-main);
 
-            margin-bottom: 30px;
+            margin-bottom: 5px;
 
             font-weight: 600;
 
@@ -82,17 +82,141 @@
 
 
 
-        /* Printable Area Wrapper */
+        .subtitle {
 
-        #report-area {
+            text-align: center;
 
-            padding: 10px;
+            color: var(--accent-gold);
 
-            background-color: var(--bg-dark);
+            font-size: 13px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 30px;
 
         }
 
 
+
+        /* Pre-Trade Checklist Panel */
+
+        .checklist-panel {
+
+            background-color: var(--card-dark);
+
+            border: 1px solid var(--accent-gold);
+
+            border-radius: 8px;
+
+            padding: 20px;
+
+            margin-bottom: 30px;
+
+        }
+
+
+
+        .checklist-title {
+
+            color: var(--accent-gold);
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            text-transform: uppercase;
+
+            margin-bottom: 15px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+
+
+        .checklist-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+            gap: 12px;
+
+        }
+
+
+
+        .checklist-item {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 10px;
+
+            background-color: rgba(255, 255, 255, 0.02);
+
+            padding: 10px;
+
+            border-radius: 6px;
+
+            border: 1px solid var(--border-color);
+
+        }
+
+
+
+        .checklist-item input[type="checkbox"] {
+
+            width: 18px;
+
+            height: 18px;
+
+            margin-top: 2px;
+
+            cursor: pointer;
+
+            accent-color: var(--accent-gold);
+
+        }
+
+
+
+        .checklist-item label {
+
+            font-size: 13px;
+
+            color: var(--text-main);
+
+            line-height: 1.4;
+
+            cursor: pointer;
+
+        }
+
+
+
+        .checklist-item label span {
+
+            display: block;
+
+            color: var(--text-muted);
+
+            font-size: 11px;
+
+            margin-top: 2px;
+
+        }
+
+
+
+        /* Analytics Dashboard */
 
         .analytics-grid {
 
@@ -200,13 +324,7 @@
 
 
 
-        .btn:hover {
-
-            opacity: 0.9;
-
-        }
-
-
+        .btn:hover { opacity: 0.9; }
 
         .btn-add { background-color: var(--accent-blue); }
 
@@ -266,7 +384,7 @@
 
 
 
-        input, select {
+        input[type="text"], input[type="number"], select {
 
             background-color: var(--bg-dark);
 
@@ -281,16 +399,6 @@
             width: 100%;
 
             box-sizing: border-box;
-
-        }
-
-
-
-        input:focus, select:focus {
-
-            border-color: var(--accent-blue);
-
-            outline: none;
 
         }
 
@@ -314,13 +422,7 @@
 
 
 
-        .btn-delete:hover {
-
-            background-color: rgba(246, 70, 93, 0.1);
-
-        }
-
-
+        .btn-delete:hover { background-color: rgba(246, 70, 93, 0.1); }
 
         .text-win { color: var(--accent-green) !important; font-weight: bold; }
 
@@ -328,7 +430,7 @@
 
 
 
-        /* PDF Generation Overrides */
+        /* Print Overrides */
 
         .pdf-mode input, .pdf-mode select {
 
@@ -340,13 +442,9 @@
 
             padding: 0 !important;
 
-            appearance: none;
-
-            -webkit-appearance: none;
-
         }
 
-        .pdf-mode .btn-delete, .pdf-mode .control-panel {
+        .pdf-mode .btn-delete, .pdf-mode .control-panel, .pdf-mode .checklist-panel {
 
             display: none !important;
 
@@ -364,11 +462,115 @@
 
     <h1>SHINOBI MASTER SESSION JOURNAL</h1>
 
+    <div class="subtitle">Execution Protocol For Disciplined Retail Traders</div>
+
+
+
+    <!-- Pre-Trade Strategic Discipline Checklist -->
+
+    <div class="checklist-panel">
+
+        <div class="checklist-title">
+
+            ⚔️ Pre-Trade Rules of Engagement (Verify Before Entry)
+
+        </div>
+
+        <div class="checklist-grid">
+
+            <div class="checklist-item">
+
+                <input type="checkbox" id="chk-trend">
+
+                <label for="chk-trend">
+
+                    HTF HTF Context & Edge Verified
+
+                    <span>Is this entry aligned with Higher Timeframe structure, or am I fighting macro momentum?</span>
+
+                </label>
+
+            </div>
+
+            <div class="checklist-item">
+
+                <input type="checkbox" id="chk-news">
+
+                <label for="chk-news">
+
+                    High-Impact News Impact Check
+
+                    <span>Are there major macroeconomic data releases scheduled within the next hour that could induce toxic volatility?</span>
+
+                </label>
+
+            </div>
+
+            <div class="checklist-item">
+
+                <input type="checkbox" id="chk-rr">
+
+                <label for="chk-rr">
+
+                    Mathematical Risk-to-Reward Ratio
+
+                    <span>Is my target technically viable, yielding at least a 1:2 premium ratio relative to my invalidation level?</span>
+
+                </label>
+
+            </div>
+
+            <div class="checklist-item">
+
+                <input type="checkbox" id="chk-size">
+
+                <label for="chk-size">
+
+                    Strict Capital Risk Sizing
+
+                    <span>Is my position size calculated precisely based on my stop loss so I lose no more than 1-2% max capital?</span>
+
+                </label>
+
+            </div>
+
+            <div class="checklist-item">
+
+                <input type="checkbox" id="chk-state">
+
+                <label for="chk-state">
+
+                    Emotional & Physiological Equilibrium
+
+                    <span>Am I chasing a previous loss, trading out of boredom, or executing with absolute neutral objectivity?</span>
+
+                </label>
+
+            </div>
+
+            <div class="checklist-item">
+
+                <input type="checkbox" id="chk-plan">
+
+                <label for="chk-plan">
+
+                    Ironclad Invalidation Plan
+
+                    <span>Do I know exactly where my terminal exit point is if the technical thesis fails, or will I freeze?</span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+    </div>
+
 
 
     <div class="control-panel">
 
-        <button class="btn btn-add" onclick="addNewRow()">+ Add New Trade</button>
+        <button class="btn btn-add" onclick="addNewRow()">+ Add New Trade Execution</button>
 
         <div class="btn-group">
 
@@ -382,11 +584,9 @@
 
 
 
-    <!-- Wrap everything that goes into the document report -->
-
     <div id="report-area">
 
-        <!-- Analytics Dashboard -->
+        <!-- Metrics -->
 
         <div class="analytics-grid">
 
@@ -426,7 +626,7 @@
 
 
 
-        <!-- Journal Table -->
+        <!-- Ledger -->
 
         <div class="table-container">
 
@@ -452,11 +652,7 @@
 
                 </thead>
 
-                <tbody id="journal-tbody">
-
-                    <!-- Rows injected dynamically -->
-
-                </tbody>
+                <tbody id="journal-tbody"></tbody>
 
             </table>
 
@@ -502,7 +698,7 @@
 
         if (tradeDatabase.length === 0) {
 
-            tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted);">No trades logged in this session. Add a trade above to get started.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted);">No executions logged. Clear the checklist parameters above and deploy a trade.</td></tr>`;
 
             return;
 
@@ -514,17 +710,11 @@
 
             const row = document.createElement('tr');
 
-            
-
             row.innerHTML = `
 
                 <td><strong>T-${String(index + 1).padStart(2, '0')}</strong></td>
 
-                <td>
-
-                    <input type="text" value="${trade.asset}" onchange="updateCell(${index}, 'asset', this.value)" placeholder="e.g., BTCUSDT">
-
-                </td>
+                <td><input type="text" value="${trade.asset}" onchange="updateCell(${index}, 'asset', this.value)" placeholder="e.g., BTCUSDT"></td>
 
                 <td>
 
@@ -550,17 +740,9 @@
 
                 </td>
 
-                <td>
+                <td><input type="number" value="${trade.pnl}" onchange="updateCell(${index}, 'pnl', this.value)" placeholder="0.00"></td>
 
-                    <input type="number" value="${trade.pnl}" onchange="updateCell(${index}, 'pnl', this.value)" placeholder="0.00">
-
-                </td>
-
-                <td class="action-cell">
-
-                    <button class="btn-delete" onclick="deleteRow(${index})">Delete</button>
-
-                </td>
+                <td class="action-cell"><button class="btn-delete" onclick="deleteRow(${index})">Delete</button></td>
 
             `;
 
@@ -574,6 +756,26 @@
 
     function addNewRow() {
 
+        // Enforce checklist rules for behavioral discipline
+
+        const checkboxes = document.querySelectorAll('.checklist-grid input[type="checkbox"]');
+
+        let allChecked = true;
+
+        checkboxes.forEach(cb => { if(!cb.checked) allChecked = false; });
+
+
+
+        if(!allChecked) {
+
+            alert("⚠️ SYSTEM VIOLATION: You cannot open an execution until every metric on the Pre-Trade Checklist is verified. Do not gamble.");
+
+            return;
+
+        }
+
+
+
         tradeDatabase.push({ asset: '', direction: 'LONG', outcome: 'WIN', pnl: 0 });
 
         saveToLocalStorage();
@@ -582,21 +784,19 @@
 
         calculateMetrics();
 
+
+
+        // Reset checks after passing to enforce it for the next execution
+
+        checkboxes.forEach(cb => cb.checked = false);
+
     }
 
 
 
     function updateCell(index, key, value) {
 
-        if (key === 'pnl') {
-
-            tradeDatabase[index][key] = parseFloat(value) || 0;
-
-        } else {
-
-            tradeDatabase[index][key] = value;
-
-        }
+        tradeDatabase[index][key] = key === 'pnl' ? (parseFloat(value) || 0) : value;
 
         saveToLocalStorage();
 
@@ -672,13 +872,9 @@
 
 
 
-    // Engine: Export Ledger to clean CSV File
-
     function exportToCSV() {
 
-        if (tradeDatabase.length === 0) return alert("No data to export!");
-
-        
+        if (tradeDatabase.length === 0) return alert("No data available.");
 
         let csvContent = "data:text/csv;charset=utf-8,Trade ID,Asset/Pair,Direction,Outcome,Net PnL ($)\n";
 
@@ -688,15 +884,13 @@
 
         });
 
-        
-
         const encodedUri = encodeURI(csvContent);
 
         const link = document.createElement("a");
 
         link.setAttribute("href", encodedUri);
 
-        link.setAttribute("download", `shinobi_trading_session_${new Date().toISOString().slice(0,10)}.csv`);
+        link.setAttribute("download", `shinobi_session_${new Date().toISOString().slice(0,10)}.csv`);
 
         document.body.appendChild(link);
 
@@ -708,19 +902,15 @@
 
 
 
-    // Engine: Print Premium PDF Document from UI View
-
     function exportToPDF() {
 
-        if (tradeDatabase.length === 0) return alert("No data to export!");
-
-        
+        if (tradeDatabase.length === 0) return alert("No data available.");
 
         const element = document.getElementById('report-area');
 
-        
+        document.body.classList.add('pdf-mode');
 
-        // Temporarily transform inputs to clean text strings for seamless printing
+
 
         const rows = element.querySelectorAll('tbody tr');
 
@@ -738,7 +928,7 @@
 
                 row.cells[4].innerHTML = `<span class="${data.pnl >= 0 ? 'text-win' : 'text-loss'}">${data.pnl}</span>`;
 
-                row.cells[5].style.display = 'none'; // Hide actions column entirely
+                row.cells[5].style.display = 'none';
 
             }
 
@@ -752,7 +942,7 @@
 
             margin:       15,
 
-            filename:     `shinobi_performance_report_${new Date().toISOString().slice(0,10)}.pdf`,
+            filename:     `shinobi_report_${new Date().toISOString().slice(0,10)}.pdf`,
 
             image:        { type: 'jpeg', quality: 0.98 },
 
@@ -766,7 +956,7 @@
 
         html2pdf().set(opt).from(element).save().then(() => {
 
-            // Restore UI inputs back to interactive state post-rendering
+            document.body.classList.remove('pdf-mode');
 
             renderTable();
 
